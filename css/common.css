@@ -3,8 +3,8 @@ body {
 	font:normal 18px 'Source Sans Pro', sans-serif, Arial, Verdana;
 	font-weight:400;
 	line-height:1.6;
-	color:#1c1b20;
-	background-color:#fff;
+	color:#fff;
+	background-color:#000;
 	margin:0;
 	padding:0;
 }
@@ -15,7 +15,7 @@ h1, h2, h3, h4, h5, h6, div, p, dl, dt, dd, ul, ol, li, form, fieldset, blockquo
 }
 li{  list-style:none;  }
 ul, ol{  list-style:none;  }
-a{  text-decoration:none; color:#000;  }
+a{  text-decoration:none; color:#fff; cursor:pointer  }
 img{ vertical-align:top; } /* img가 베이스라인만큼 떠있는 것을 없애줌 */
 table{ width:100%; border-collapse:collapse; }
 strong, em{ font-style:normal; font-weight:400; }
@@ -25,24 +25,36 @@ button:focus{ outline:none; }
 
 /* ---------------------common------------------- */
 .clear:after{ content:''; display:block; clear:both; }
-button{ border-radius:10px; margin:50px auto 0; padding:15px 30px; font-size:50px; box-shadow:3px 3px 4px rgba(0, 0, 0, .5); display:block; transition:all .3s ease-out; }
-button:hover{ transform:scale(1.05, 1.05); }
+.btn{ border-radius:10px; margin:0 auto; padding:15px 30px; font-size:50px; box-shadow:3px 3px 4px rgba(0, 0, 0, .5); display:block; opacity:1; transition:all .2s ease-out; }
+.btn:hover{ transform:scale(1.05, 1.05); }
 
 
 /* ---------------------content------------------- */
-.content{ width:500px; background-color:#fdf5e4; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); }
-h1{ outline:1px solid red; font-size:30px; text-align:center; }
-.result{ outline:1px solid lime; text-align:center;  }
+.content{ width:100vw; min-width:350px; height:100vh; background-color:#000; position:absolute; }
+h1{ margin-top:50px; margin-bottom:50px; font-size:30px; text-align:center; }
+.result{ width:100%; text-align:center; font-size:130px; opacity:0; transition:all .5s ease-out; transition-delay:.3s; position:absolute; top:50%; transform:translateY(-50%); }
+.result.hide{ opacity:1; }
 
-.btnBox{ outline:1px solid red; }
+.btnBox{ width:100%; height:100px; position:absolute; bottom:50%; }
+.btnBox.hide2{ bottom:50px; }
 
 .btnBox > button.click{  color:#fff; background-color:#3734e9; }
-.btnBox.choose > button.click{ display:none; }
+.btnBox.hide > button.click{ opacity:0; }
+.btnBox.hide2 > button.click{ display:none; }
 
-.btnBox > .afterBtns{ outline:1px solid blue; margin:50px 0 0; display:;  }
-.btnBox > .afterBtns > button{ width:220px; margin:0 13px; font-size:30px; display:inline-block; }
-.btnBox > .afterBtns > button.ok{ color:#3734e9; background-color:#fff; }
-.btnBox > .afterBtns > button.replay{  color:#fff; background-color:#3734e9;  }
-.btnBox.choose > .afterBtns{ display:block; }
+.btnBox > .afterBtns{ width:500px; display:none; transition:all .1s ease-out; opacity:0; position:absolute; left:50%; transform:translateX(-50%); }
+.btnBox > .afterBtns > a{ width:180px; margin:0 13px; padding:10px 20px; font-size:30px; text-align:center; display:inline-block; }
+.btnBox > .afterBtns > a.ok{ color:#3734e9; background-color:#fff; }
+.btnBox > .afterBtns > a.replay{  color:#fff; background-color:#3734e9;  }
+.btnBox.hide > .afterBtns{ display:inline-block; }
+.btnBox.hide2 > .afterBtns{ opacity:1; transition-delay:.3s; }
 
 
+@media screen and (max-width: 600px) {
+    h1{ font-size:20px; }
+    .result{ font-size:70px; }
+
+    .btnBox{ height:170px; }
+    .btnBox > .afterBtns{ width:auto; }
+    .btnBox > .afterBtns > a{ width:180px; margin:10px; display:block; }
+}

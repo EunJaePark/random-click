@@ -5,7 +5,7 @@ clickBtn.addEventListener('click', function() {
 });
 
 //다시선택 버튼 클릭시.
-let afterBtns = document.querySelectorAll('.afterBtns > button');
+let afterBtns = document.querySelectorAll('.afterBtns > a');
 for(let i = 0; i < afterBtns.length; i++) {
     afterBtns[i].addEventListener('click', function() {
         if(afterBtns[i].classList.contains('ok')) {
@@ -30,8 +30,10 @@ function menuClick() {
     let btnBox = document.querySelector('.btnBox');
     let menu;
     setTimeout(function(){
-        if( number === 1 ) {
+        if( number === 0 ) {
             menu = '김치찌개';
+        } else if( number === 1 ) {
+            menu = '순두부찌개';
         } else if( number === 2 ) {
             menu = '된장찌개';
         } else if( number === 3 ) {
@@ -94,8 +96,14 @@ function menuClick() {
 
         console.log(menu);
 
-        document.querySelector('.result').innerHTML = menu;
+        let result = document.querySelector('.result');
+        result.innerHTML = menu;
         
-        btnBox.classList.add('choose');
-    },800);
+        result.classList.add('hide');
+        btnBox.classList.add('hide');
+    },700);
+
+    setTimeout(function() {
+        btnBox.classList.add('hide2');
+    }, 1400);
 }
