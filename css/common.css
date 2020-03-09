@@ -30,19 +30,27 @@ button:focus{ outline:none; }
 
 
 /* ---------------------content------------------- */
-.content{ width:100vw; min-width:350px; height:100vh; background-color:#000; position:absolute; }
-h1{ margin-top:50px; margin-bottom:50px; font-size:30px; text-align:center; }
+.content{ width:100vw; min-width:350px; height:100vh; min-height:770px; background-color:#000; position:absolute; }
+h1{ margin:50px 0; font-size:30px; text-align:center; }
 .result{ width:100%; text-align:center; font-size:130px; opacity:0; transition:all .5s ease-out; transition-delay:.3s; position:absolute; top:50%; transform:translateY(-50%); }
 .result.hide{ opacity:1; }
-.confirm{ outline:1px solid red; width:100%; height:0; background-color:#000; text-align:center; opacity:0; z-index:100; position:absolute; left:0; top:150px; }
-.confirm.show{ height:calc(100vh + -400px); opacity:1; }
-.confirm > span{ font-size:50px; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); }
+.confirm{  width:100%; height:0; background-color:#000; text-align:center; opacity:0; z-index:100; position:absolute; left:0; top:140px; }
+.confirm.show{ height:calc(100vh + -400px); min-height:400px; opacity:1; }
+.confirm > span{ width:100%; font-size:50px; position:absolute; left:0; top:50%; transform:translateY(-50%); }
 .confirm > span > strong{ font-size:150px; display:block; }
 
 .menuPlus{ width:420px; display:inline-block; position:absolute; left:50%; transform:translateX(-50%); }
-.menuPlus > input{ border:none; border-bottom:2px solid #fff; width:calc(80% + -90px); line-height:45px; margin-right:10px; padding:7px 30px; font-size:20px; color:#fff; background-color:transparent; }
-.menuPlus > button{ border:2px solid #fff; border-radius:5px;  padding:10px 20px; font-size:20px; color:#fff; transform:translateY(7px); display:inline-block;}
-.menuPlus > button:hover{ background-color:#3734e9; color:#fff; }
+.menuPlus > input{ border:none; border-bottom:2px solid #fff; width:calc(80% + -90px); line-height:45px; margin-right:10px; padding:7px 30px; font-size:20px; color:#fff; background-color:transparent; display:none; }
+.menuPlus > input:focus{ outline:none; }
+.menuPlus > button{ border:2px solid rgba(255, 255, 255, .5); border-radius:5px; margin:0 auto; padding:10px 20px; font-size:20px; color:rgba(255, 255, 255, .5); transform:translateY(7px); display:block; }
+.menuPlus > button:hover{ border-color:#fff; background-color:; color:#fff; }
+.menuPlus > .close{ border:none; padding:0 5px; font-size:20px; color:#fff; position:absolute; top:0; left:-10px; display:none; }
+.menuPlus > .close > span{ font-size:0; }
+
+.menuPlus.show > input{ display:inline-block; }
+.menuPlus.show > button{ display:inline-block; }
+.menuPlus.show > .close{ display:block; }
+
 
 .btnBox{ width:100%; height:100px; position:absolute; bottom:50%; }
 .btnBox.hide2{ bottom:50px; }
@@ -62,8 +70,15 @@ h1{ margin-top:50px; margin-bottom:50px; font-size:30px; text-align:center; }
 
 
 @media screen and (max-width: 600px) {
-    h1{ font-size:20px; }
+	.content{ min-height:750px; }
+
+    h1{ margin:40px 0; font-size:20px; }
 	.result{ font-size:70px; }
+
+	.confirm{ top:110px; }
+	.confirm.show{ min-height:300px; }
+	.confirm > span{ font-size:30px; }
+	.confirm > span > strong{ font-size:70px; }
 
 	.menuPlus > input{ font-size:18px; }
 

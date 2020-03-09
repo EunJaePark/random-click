@@ -1,5 +1,20 @@
+let menuPlus = document.querySelector('.menuPlus');
+let menuCloseBtn = document.querySelector('.close');
 // 메뉴추가 버튼 클릭시 Input에 적은 메뉴 추가되게 함.
 
+// 메뉴추가 버튼 클릭시 input 창 보이게 함. (close버튼 클릭하며 input안보이게함.)
+menuPlus.addEventListener('click', function(e) {
+    if(e.target.classList.contains('menuBtn')) {
+        menuPlus.querySelector('button').innerHTML = '추가';
+        menuPlus.querySelector('button').style = 'color:#fff; border-color:#fff;';
+        menuPlus.classList.add('show');  
+    } else if(e.target.classList.contains('close')) {
+        menuPlus.querySelector('button').innerHTML = '메뉴추가';
+        menuPlus.querySelector('button').style = '';
+        menuPlus.classList.remove('show');
+    }
+    
+});
 
 
 
@@ -93,7 +108,7 @@ function menuClick() {
         } else if( number === 23 ) {
             menu = '쫄면';
         } else if( number === 24 ) {
-            menu = '뷔페';
+            menu = '굴전';
         } else if( number === 25 ) {
             menu = '짜장면';
         } else if( number === 26 ) {
