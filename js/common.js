@@ -1,3 +1,8 @@
+// 메뉴추가 버튼 클릭시 Input에 적은 메뉴 추가되게 함.
+
+
+
+
 //click 버튼 클릭시.
 let clickBtn = document.querySelector('button.click');
 clickBtn.addEventListener('click', function() {
@@ -5,16 +10,25 @@ clickBtn.addEventListener('click', function() {
 });
 
 //다시선택 버튼 클릭시.
+let btnBox = document.querySelector('.btnBox');
 let afterBtns = document.querySelectorAll('.afterBtns > a');
 for(let i = 0; i < afterBtns.length; i++) {
     afterBtns[i].addEventListener('click', function() {
         if(afterBtns[i].classList.contains('ok')) {
-            alert('맛있는 식사시간 되세요!');
+            // alert(`오늘 식사메뉴는 "${menu}" 입니다!`);
+            let confirm = document.querySelector('.confirm');
+            confirm.innerHTML = `<span>오늘 메뉴는 <strong>${menu}</strong>입니다 !</span>`;
+            confirm.classList.add('show');
+            btnBox.classList.add('hide3');
         } else if(afterBtns[i].classList.contains('replay')) {
             menuClick();
+            
         }
     });
 }
+
+let menu; // 메뉴확정 버튼 클릭시에 사용하기 위해 menuClick()함수 바깥에다 선언해준 것.
+
 
 // menu 선택 함수.
 function menuClick() {
@@ -27,8 +41,8 @@ function menuClick() {
     // Math.random() :  소숫점이 많이 붙은 난수가 무작위로 형성
     console.log(number);
     
-    let btnBox = document.querySelector('.btnBox');
-    let menu;
+    
+    // let menu;
     setTimeout(function(){
         if( number === 0 ) {
             menu = '김치찌개';
@@ -95,6 +109,7 @@ function menuClick() {
         }
 
         console.log(menu);
+        
 
         let result = document.querySelector('.result');
         result.innerHTML = menu;
