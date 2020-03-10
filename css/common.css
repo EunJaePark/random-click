@@ -63,6 +63,9 @@ h1{ margin:50px 0; font-size:30px; text-align:center; }
 .btnBox > .afterBtns > a{ width:180px; margin:0 13px; padding:10px 20px; font-size:30px; text-align:center; display:inline-block; }
 .btnBox > .afterBtns > a.ok{ color:#3734e9; background-color:#fff; }
 .btnBox > .afterBtns > a.replay{  color:#fff; background-color:#3734e9;  }
+.btnBox > .afterBtns > .save{ border:2px solid rgba(255, 255, 255, .5); border-radius:5px; padding:6px 12px; font-size:15px; color:rgba(255, 255, 255, .5); position:absolute; bottom:100%; left:50%; transform:translate(-50%, -20px); }
+.btnBox > .afterBtns > .save:hover{ border-color:#fff; color:#fff; }
+
 .btnBox.hide > .afterBtns{ display:inline-block; }
 .btnBox.hide2 > .afterBtns{ opacity:1; transition-delay:.3s; }
 .btnBox.hide3 > .afterBtns{ width:auto; }
