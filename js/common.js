@@ -9,12 +9,8 @@ function randomBtnClick() {
 
 // ------ menu 선택 함수. ------
 function menuClick() {
-    // let 변수들을 함수 바깥에서 선언해줬으나, divideLsMenu()함수로 인해 오류가 발생해 함수 안으로 넣어줌.
-    let btnBox = document.querySelector('.btnBox');
     let listBox = document.querySelector('.listBox');
     let menuPlus = document.querySelector('.menuPlus');
-    let number = Math.floor(Math.random() * divideLsMenu().length); 
-    let menuList = divideLsMenu(); 
     const audio = document.querySelector('audio');
     audio.play();   
 
@@ -37,21 +33,19 @@ function menuClick() {
 // ------ [메뉴확정], [다시선택], [매장찾기] 버튼 클릭시. ------
 function reselectConfirmMenu() {
     const result = document.querySelector('.result');
-    const confirmText = document.querySelector('.confirm');
+    const confirmBox = document.querySelector('.confirm');
+    const confirmText = document.querySelector('.confirm > p');
     const afterBtns = document.querySelectorAll('.afterBtns > .btn');
     const mapBtn = document.querySelector('.mapBtn');
-    let btnBox = document.querySelector('.btnBox');
-    let number = Math.floor(Math.random() * divideLsMenu().length); 
-    let menuList = divideLsMenu(); 
     console.log(afterBtns);
     afterBtns.forEach((ele) => {
         ele.addEventListener('click', (event) => {
             event.preventDefault();
             if(ele.classList.contains('ok')) {
-                confirmText.innerHTML = `<span>오늘 메뉴는 <strong>${menuList[number]}</strong>입니다 !<span>`;
+                confirmText.innerHTML = `오늘 메뉴는 <strong>${menuList[number]}</strong>입니다 !`;
 
                 result.classList.add('hide');
-                confirmText.classList.add('show');
+                confirmBox.classList.add('show');
                 btnBox.classList.add('hide3');
                 mapBtn.classList.add('show');
             } else if(ele.classList.contains('replay')) {
@@ -168,7 +162,11 @@ function addLoadCount() {
     console.log(count, typeof count);
 }
 
-
+// ------ menuClick(), reselectConfirmMenu()에서 사용하기 위함. ------
+// (divideLsMenu()함수 때문에 생성주기 꼬여서 해당 변수들만 제일 아래에서 선언한 것.)
+let btnBox = document.querySelector('.btnBox');
+let number = Math.floor(Math.random() * divideLsMenu().length); 
+let menuList = divideLsMenu(); 
 
 function init() {
     if(getLoadCount() < 1) {
