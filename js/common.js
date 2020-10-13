@@ -6,6 +6,7 @@ const MENULIST = 'menuList', // local storage 저장명.
     menuPlusForm = document.querySelector('form.menuPlus'),
     input = document.querySelector('input'),
     menuPlus = document.querySelector('.menuPlus'),
+    clickBtn = document.querySelector('button.click'),
     listBox = document.querySelector('ul.listBox'),
     result = document.querySelector('.result'),
     confirmBox = document.querySelector('.confirm'),
@@ -18,7 +19,6 @@ const MENULIST = 'menuList', // local storage 저장명.
 
 // ------ click 버튼 클릭시.(랜덤메뉴 실행 버튼) ------
 function randomBtnClick() {
-    const clickBtn = document.querySelector('button.click');
     clickBtn.addEventListener('click', function() {
         menuClick();
     });
@@ -92,10 +92,15 @@ function removeMenu(event) {
 
     menuArr = cleanMenuArr;
     saveMenu();
+
+    // menuArr의 개수 다시 설정.
+    number = Math.floor(Math.random() * menuArr.length);
+    // menu 개수가 0개일 경우 [click]버튼 숨기고 알림창 띄움.
+    checkMenuNumAlert(); 
 }
 
 
-// ------ input에 새롭게 입력한 메뉴 추가. ------
+// ------ 👍🏼input에 새롭게 입력한 메뉴 추가. ------
 function addNewMenu(event) {
     event.preventDefault();
     localStorage.setItem(MENULIST, JSON.stringify(menuArr));
@@ -140,15 +145,17 @@ function insertSavedMenu(receiveMenu) {
 
         menuArr.push(menuObj);
         saveMenu();
+
+        // menu 개수가 0개일 경우 [click]버튼 숨기고 알림창 띄움.
+        checkMenuNumAlert(); 
     }
+
 }
 
 
 
 // ------ 👍🏼local storage에 저장 된 메뉴목록 불러옴. ------
 function getLSmenu() {
-    /*----[]를 한번에 적는 정규식을 알아내면 수정할것.....ㅠㅠ ----*/ 
-    // return localStorage.getItem('menuList').replace('[', '').replace(']', '');
     const lsMenu = localStorage.getItem(MENULIST);
     if (lsMenu !== null) {
         const parseMenu = JSON.parse(lsMenu);
@@ -201,6 +208,26 @@ function makeDateListID() {
 }
 
 
+// menu 개수가 0개일 경우 [click]버튼 숨기고 알림창 띄움.
+function checkMenuNumAlert() {
+    const alertText = document.querySelector('.alertText');
+    // 메뉴가 0개일 경우 알림창 뜨도록 함.
+    if(menuArr.length === 0) {
+        console.log('0개다!!');
+        // 알림창 뜨도록 하자!!
+        clickBtn.classList.add('hide');
+        alertText.classList.add('show');
+        return;
+    } else {
+        console.log('1개 이상이다!');
+        clickBtn.classList.remove('hide');
+        alertText.classList.remove('show');
+    }
+    // 이 함수는 기본적으로 화면 랜더링 될때 작동하도록 실행시켰고,
+    // insertSavedMenu(), removeMenu()함수에서도 작동시켜 메뉴가 추가/삭제될 때도 작동하도록 해줬다.
+    // (화면에 실시간으로 바로 반영될 수 있도록 하기 위함)
+}
+
 
 // ------ 접속 횟수 확인(처음 접속시에만 base menu 저장되도록 하기 위함) ------
 function saveFirstLoadCount() {
@@ -222,18 +249,22 @@ function init() {
         // 처음 접속시에만 base menu 추가해줌.
         saveBaseMenu();
         // 랜덤선택 숫자.(모든 메뉴목록이 생성된 후에 length를 구해야해서 메뉴저장 함수 이후로 배치)
-        number = Math.floor(Math.random() * menuArr.length); 
+        number = Math.floor(Math.random() * menuArr.length);  
+        // menu 개수가 0개일 경우 [click]버튼 숨기고 알림창 띄움.
+    checkMenuNumAlert(); 
     } else {
         // 두 번째 접속부터 화면에 메뉴목록 뿌리는 함수 기본실행시켜줌.(base menu 저장할 때 화면에 뿌려지는 과정이 2번 반복되는 현상 막기 위함.)
         getLSmenu();
         // 랜덤선택 숫자.(모든 메뉴목록이 생성된 후에 length를 구해야해서 메뉴저장 함수 이후로 배치)
-        number = Math.floor(Math.random() * menuArr.length);
+        number = Math.floor(Math.random() * menuArr.length); 
+        // menu 개수가 0개일 경우 [click]버튼 숨기고 알림창 띄움.
+        checkMenuNumAlert(); 
     }
 
-    addLoadCount(); // 매번 접속시마다 loadCount를 1씩 늘려줌.  
-    menuPlusForm.addEventListener('submit', addNewMenu);
+    addLoadCount(); // 매번 접속시마다 loadCount를 1씩 늘려줌.    
     reselectConfirmMenu();
     randomBtnClick();
+    menuPlusForm.addEventListener('submit', addNewMenu);
 }
 
 init();
